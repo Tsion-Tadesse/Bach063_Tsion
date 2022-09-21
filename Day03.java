@@ -1,28 +1,32 @@
- /*
+   /*
 @Author Tsion Tadesse
 @Date 09-21-2022
 */
 
 import java.util.Scanner;
-class Day03{
+class Day03 {
   public static void main(String[] args) {
-    maxNum(4,5);
-    System.out.println("Tsion Tadesse");
-Scanner in = new Scanner(System.in);
-    System.out.println("ENter the number");
+    //method call to check the methods
+    evenOdd();
+  maxNum(4,5);
+  swapNums(5, 6);
+  swapNumWithNoVar(7,6);
+    maxOfThree(3, 1, 5);
+    findVowelConsonant('e');
+    evenOddTernary(7);
+  }
+  //find if the number is even or odd
+  public static void evenOdd(){
+    Scanner in = new Scanner(System.in);
+    System.out.println("Enter the number");
     int n = in.nextInt();
     if(n%2 == 0 && n>2){
       System.out.println("The number is even");
     }else{
       System.out.println("The number is odd");
     }
-    //method call to check the methods
-  maxNum(4,5);
-  swapNums(5, 6);
-  swapNumWithNoVar(7,6);
-    maxOfThree(3, 1, 5);
-    findVowelConsonant('e');
   }
+  
   //find the max of two numbers
   public static void maxNum(int a, int b){
     if(a>b){
@@ -45,16 +49,11 @@ Scanner in = new Scanner(System.in);
     n = n-m;
     System.out.println("First Number after Swap =" + n + "& Second Number after swap=" + m);
   }
-  public static void evenOdd(int n){
-    Scanner in = new Scanner(System.in);
-    System.out.println("ENter the number");
-   n = in.nextInt();
-    if(n%2 == 0 && n>2){
-      System.out.println("The number is even");
-    }else{
-      System.out.println("The number is odd");
+  public static void evenOddTernary(int n){
+   String isEvenOdd = (n%2 == 0 && n>2) ? "even" : "Odd"; 
+    System.out.println("The number is " + isEvenOdd);
     }
-  }
+  
   public static void maxOfThree(int a, int b, int c){
     if(a>b && a>c){
       System.out.println("The max is" + a);
