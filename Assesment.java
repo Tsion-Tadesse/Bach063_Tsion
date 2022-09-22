@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class Assesment_01{
+class Assesment{
   public static void main(String[] args) { 
     //calling for testing purposes
     isPrimeNum(8);
