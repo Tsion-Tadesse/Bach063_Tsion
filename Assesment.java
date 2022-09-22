@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 class Assesment_01{
   public static void main(String[] args) { 
@@ -25,6 +24,10 @@ class Assesment_01{
    System.out.println("Enter a positive integer: ");
    int n = in.nextInt();
    isPrime(n);
+   
+    countPos();
+    
+    countPosNegZero();
   }
   public static boolean isPrimeNum(int n){
     boolean isPrime;
@@ -146,4 +149,44 @@ int r, sum =0;
      choice = in.nextLine();
    }while(choice != "n");
  }
-}
+
+
+public static void countPos(){
+    Scanner in = new Scanner (System.in);
+    int count = 0;
+    int n; 
+    do{
+      System.out.println("Enter a number");
+      n =in.nextInt();
+      if(n>0){
+        count +=1;
+    }
+    }while(n!=0);
+    System.out.println("The number of positive numbers are" + count);
+    
+  }
+  public static void countPosNegZero(){
+    Scanner in = new Scanner (System.in);
+    int zero_count = 0;
+    int pos_count = 0;
+    int neg_count = 0;
+    int n;
+    do{ 
+      System.out.println("Enter a number");
+      n =in.nextInt();
+      if(n>0){
+        pos_count +=1;
+      }else if(n<0){
+        neg_count += 1;
+      }else if(n==0){
+        zero_count += 1;
+      }else{
+        System.out.println("Invalid input");
+      }
+        
+    }while(n!=10000);
+    System.out.println("The number of positive numbers are" + pos_count);
+        System.out.println("The number of negative numbers are" + neg_count);
+        System.out.println("The number of zeros are" + zero_count);
+  }
+  }
