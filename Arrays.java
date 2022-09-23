@@ -7,6 +7,7 @@ class Arrays {
       sortArrayDescending();
       sortArrayAscending();
       removeDuplicate();
+    EqualArray();
   }
 //1
 public static void search(){
@@ -132,5 +133,25 @@ public static void search(){
     for(int i=0; i<arr3.length; i++){
       System.out.print(arr3[i] + " ");
     }
+  }
+  public static void EqualArray(){
+    int [] arr = {2, 1, 5};
+    int []arr2 = {2, 4, 5};
+    boolean isEqual = false; 
+    //int arr3Len = arr.length + arr2.length;
+    if(arr.length == arr2.length){
+      
+      for(int i=0; i<arr.length; i++){
+        for(int j=0; j<arr2.length; j++){
+          if(arr[i] == arr2[j]){
+            isEqual = true;
+          }else{
+            isEqual = false;
+          }
+        }    
+      }
+      System.out.print(isEqual);
+    }
+    
   }
   }
