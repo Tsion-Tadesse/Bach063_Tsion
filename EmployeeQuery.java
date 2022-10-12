@@ -19,11 +19,13 @@ public class EmployeeQuery  {
 			Connection con = DriverManager.getConnection(url, "root", "password");
 			PreparedStatement psmt;
 			 //Modified the table added email
-			//psmt = con.prepareStatement("alter table emptable add email int  after empLname");
-			//psmt = con.prepareStatement(" alter table emptable drop colunm email");
+			//psmt = con.prepareStatement("alter table emptable add email varchar(30)  after empLname");
+			//psmt.executeUpdate();
 			//creating a table
+			java.sql.Statement st = con.createStatement();
+			
 			//psmt = con.prepareStatement("create table emptable(empno int primary key, empFname varchar(20) not null,empLname varchar(20) not null, salary int) ");
- 			
+			
 			int choice;
 			
  			Scanner in = new Scanner(System.in);
@@ -34,17 +36,17 @@ public class EmployeeQuery  {
  	 			System.out.println("4. FindEmployeeById");
  	 			System.out.println("5. Finde EmployeeByName");
  	 			System.out.println("6. Find employeeByEmail");
- 	 			System.out.println("7. Quit");
+ 	 			System.out.println("7. View all entity in Employee table");
+ 	 			System.out.println("8. Update Employee Email");
+ 	 			System.out.println("9. Quit");
  	 			System.out.println("*********************************");
  			System.out.println("Enter your choice:");
  			choice = in.nextInt();
- 			
  			
  			if(choice == 1) {
  				psmt = con.prepareStatement("insert into emptable values(?, ?, ?, ?, ?)");
  				System.out.println("Enter employee Number");
  	 			int empNum = in.nextInt();
- 	 			in.nextLine();
  	 			System.out.println("Enter employee firstname");
  	 			String fname=in.nextLine();
  	 			System.out.println("Enter employee lastname");
@@ -64,6 +66,7 @@ public class EmployeeQuery  {
  	 			System.out.println(i+ " record is Inserted!");
  	 			psmt.close();
  			}else if(choice ==2) {
+ 				//update tablename set empFname="Tsion" where empnum=1;
  				psmt = con.prepareStatement("update emptable set empFname=? where empno=?");
  				System.out.println("Enter employee Number you would like to update fname for?");
  				int empNum = in.nextInt();
@@ -73,16 +76,17 @@ public class EmployeeQuery  {
  	 			
  	 			psmt.setString(1, fname);
  	 			psmt.setInt(2, empNum);
- 	 			
+ 	 			psmt.executeUpdate();
  	 			System.out.println("Emptable is updated");
- 	 			psmt.close();
+ 	 		
  			}else if(choice ==3) {
  				psmt = con.prepareStatement("delete from emptable where empno=?");
  				System.out.println("Enter the employeeNum to be deleted");
  				int empNum = in.nextInt();
  				psmt.setInt(1, empNum);
+ 				psmt.executeUpdate();
  				System.out.println("Employee is deleted");
- 				psmt.close();
+ 				
  			}else if(choice ==4) {
  				System.out.println("Enter the employeeNum to be searched");
  				int empNum = in.nextInt();
@@ -93,7 +97,8 @@ public class EmployeeQuery  {
  					System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t" +rs.getString(3) + "\t" + rs.getString(4)
  					+"\t" + rs.getString(5) );
  				}
- 				psmt.close();
+ 				psmt.executeUpdate();
+ 				
  			}else if(choice ==5) {
  				in.nextLine();
  				System.out.println("Enter the employeeName to be searched");
@@ -105,8 +110,8 @@ public class EmployeeQuery  {
  					System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t" +rs.getString(3) + "\t" + rs.getString(4)
  					+"\t" + rs.getString(5) );
  				}
- 				
- 				psmt.close();
+ 				psmt.executeUpdate();
+ 			
  				
  			}else if(choice ==6) {
  				
@@ -119,18 +124,40 @@ public class EmployeeQuery  {
  					System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t" +rs.getString(3) + "\t" + rs.getString(4)
  					+"\t" + rs.getString(5) );
  				} 
+ 				psmt.executeUpdate();
+ 			}else if(choice==7) {
+ 				//java.sql.Statement st = con.createStatement();
+ 				ResultSet rs = st.executeQuery("select * from emptable");
+ 				System.out.println("ENum    Fname   Lname   Email                 Salary"); 
+ 				System.out.println("----------------------------------------------------"); 
+ 				while(rs.next()) {
+ 					System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3) + "\t" +  rs.getString(4) + "\t\t"+ rs.getString(5));
+ 				}
+ 				rs.close();
+ 				st.close();
+ 			}else if(choice ==8) {
+ 				//update email since I had to redo that column
+ 				System.out.println("Enter the Employee Id you would like to update email for");
+ 				int id = in.nextInt();
+ 				in.nextLine();
+ 				System.out.println("Enter the new Email");
+ 				String email = in.nextLine();
+ 				psmt = con.prepareStatement("update emptable set email=? where empno=?");
+ 				psmt.setString(1, email);
+ 				psmt.setInt(2, id);
  				
+ 				psmt.executeUpdate();
  			}else {
  				System.out.println("Invalid choice.");
  			}
- 			}while(choice != 7);
+ 			}while(choice != 9);
  		/*
 			int i = psmt.executeUpdate();
 	 			System.out.println(i+ " table created!");
 	 			psmt.close();
 	 			*/
 			System.out.println("Get Connected");
-			  con.close();
+			  con.close();	//psmt.close();
 			//st.close();
 			System.out.println("Class is Available");
 		}catch(ClassNotFoundException e) {
