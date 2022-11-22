@@ -14,6 +14,10 @@ public class PracticeQuestions {
 
         isVowelOrConsonant('a');
         isVowelOrConsonant('b');
+        //Second Max and min test
+        int[] arr = { 2, 4, 5, 1, 6 };
+        String a = secondMaxMin(arr);
+        System.out.println(a);
     }
 
     // DS1.3. Find Bigger number among two
@@ -75,4 +79,26 @@ public class PracticeQuestions {
             System.out.println(c + " is a consonant");
         }
     }
+     // Write a method that accepts an array and return the second min and max
+    // number.
+    public static String secondMaxMin(int[] arr) {
+        int secondMax = 0;
+        int secondMin = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+        secondMax = arr[arr.length - 2];
+        secondMin = arr[1];
+
+        for (int i = 0; i < arr.length; i++) {
+
+            // System.out.print(arr[i] + " ");
+        }
+        return "SecondMin: " + secondMin + " \nsecondMax: " + secondMax;
+    }
+
 }
